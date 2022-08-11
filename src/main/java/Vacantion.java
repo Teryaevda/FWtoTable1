@@ -2,12 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vacantion {
-    static  final List<String> LIST_OF_STACK = new ArrayList<>();
-    static final List<String> LIST_OF_GRADE = new ArrayList<>();
-    static final List<String> LIST_OF_EXPIRIENCE = new ArrayList<>();
-    static final List<String> LIST_OF_WORK_FORMAT = new ArrayList<>();
-    static final List<String> LIST_OF_RESOURCE_MANAGER = new ArrayList<>();
-
 
     String nameOfVacantion;
     int idVacantion;
@@ -23,57 +17,85 @@ public class Vacantion {
     String resourceManagerOfVacantion;
     String geographyOfVacantion;
 
-    public void setNameOfVacantion(String nameOfVacantion) {
-        this.nameOfVacantion = nameOfVacantion;
+    public void setNameOfVacantion(Object nameOfVacantion) {
+        if (nameOfVacantion == null){
+            this.nameOfVacantion = "-";
+        } else {
+            this.nameOfVacantion = (String) nameOfVacantion;
+        }
     }
 
-    public void setIdVacantion(int idVacantion) {
-        this.idVacantion = idVacantion;
+    public void setIdVacantion(Object idVacantion) {
+        this.idVacantion = (int)(long)idVacantion;
     }
 
-    public void setDescriptionOfVacantion(String descriptionOfVacantion) {
-        this.descriptionOfVacantion = descriptionOfVacantion;
+    public void setDescriptionOfVacantion(Object descriptionOfVacantion) {
+        if (descriptionOfVacantion == null){
+            this.descriptionOfVacantion = "-";
+        } else {
+            this.descriptionOfVacantion = (String) descriptionOfVacantion;
+        }
     }
 
-    public void setCommentToVacantion(String commentToVacantion) {
-        this.commentToVacantion = commentToVacantion;
+    public void setCommentToVacantion(Object commentToVacantion) {
+        if (commentToVacantion == null){
+            this.commentToVacantion = "-";
+        } else {
+            this.commentToVacantion = (String) commentToVacantion;
+        }
     }
 
-    public void setProject(String project) {
-        this.project = project;
+    public void setProject(Object project) {
+        if (project == null) {
+            this.project = "-";
+        } else {
+            this.project = (String) project;
+        }
     }
 
-    public void setRequirementsToVacantion(String requirementsToVacantion) {
-        this.requirementsToVacantion = requirementsToVacantion;
+    public void setRequirementsToVacantion(Object requirementsToVacantion) {
+        if (requirementsToVacantion == null) {
+            this.requirementsToVacantion = "-";
+        } else {
+            this.requirementsToVacantion = (String) requirementsToVacantion;
+        }
     }
 
-    public void setStackOfVacantion(int numberOfStackVacantion) {
+    public void setStackOfVacantion(Object numberOfStackVacantion) {
 
-        this.stackOfVacantion = LIST_OF_STACK.get(numberOfStackVacantion);
+        this.stackOfVacantion = EnumStack.getValueEnumStack().get((int)(long)numberOfStackVacantion);
     }
 
-    public void setGradeOfVacantion(int numberGradeOfVacantion) {
-        this.gradeOfVacantion = LIST_OF_GRADE.get(numberGradeOfVacantion);
+    public void setGradeOfVacantion(Object numberGradeOfVacantion) {
+        this.gradeOfVacantion = EnumGrade.getValuesGrade().get((int)(long)numberGradeOfVacantion);
     }
 
-    public void setExpirienceOfVacantion(int numberExpirienceOfVacantion) {
-        this.expirienceOfVacantion = LIST_OF_EXPIRIENCE.get(numberExpirienceOfVacantion);
+    public void setExpirienceOfVacantion(Object numberExpirienceOfVacantion) {
+        this.expirienceOfVacantion = EnumExpirience.getValuesExpirience().get((int)(long)numberExpirienceOfVacantion);
     }
 
-    public void setAddressOfVacantion(String addressOfVacantion) {
-        this.addressOfVacantion = addressOfVacantion;
+    public void setAddressOfVacantion(Object addressOfVacantion) {
+        if (addressOfVacantion == null) {
+            this.addressOfVacantion = "-";
+        } else {
+            this.addressOfVacantion = (String) addressOfVacantion;
+        }
     }
 
-    public void setWorkFormatOfVacantion(int numberWorkFormatOfVacantion) {
-        this.workFormatOfVacantion = LIST_OF_WORK_FORMAT.get(numberWorkFormatOfVacantion);
+    public void setWorkFormatOfVacantion(Object numberWorkFormatOfVacantion) {
+        this.workFormatOfVacantion = EnumWorkFormat.getValuesWorkFormat().get((int)(long)numberWorkFormatOfVacantion);
     }
 
-    public void setResourceManagerOfVacantion(int numberResourceManagerOfVacantion) {
-        this.resourceManagerOfVacantion = LIST_OF_RESOURCE_MANAGER.get(numberResourceManagerOfVacantion);
+    public void setResourceManagerOfVacantion(Object numberResourceManagerOfVacantion) {
+        this.resourceManagerOfVacantion = EnumResourceManager.getValuesResourceManager().get((int)(long)numberResourceManagerOfVacantion);
     }
 
-    public void setGeographyOfVacantion(String geographyOfVacantion) {
-        this.geographyOfVacantion = geographyOfVacantion;
+    public void setGeographyOfVacantion(Object geographyOfVacantion) {
+        if (geographyOfVacantion == null) {
+            this.geographyOfVacantion = "-";
+        } else {
+            this.geographyOfVacantion = (String) geographyOfVacantion;
+        }
     }
 
     public String getNameOfVacantion() {
