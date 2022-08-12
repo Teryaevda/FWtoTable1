@@ -10,6 +10,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
 import java.io.FileNotFoundException;
@@ -17,14 +18,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class SheetsQuickstart {
-    private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
+    private static final String APPLICATION_NAME = "Актуальные потребности TEAMFORCE";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
-
+    ArrayList<Vacantion> listOfVacantion;
     /**
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
@@ -56,42 +59,46 @@ public class SheetsQuickstart {
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    public String allTableReturn(Object idVacantion) throws IOException, GeneralSecurityException {
-        Vacantion vacantion = new Vacantion();
+    public void writeInSheet(ArrayList<Vacantion> listOfVacantion) throws IOException, GeneralSecurityException {
+        this.listOfVacantion = listOfVacantion;
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        final String spreadsheetId = "1Wusaf2ThXm5DxfeOPYdv2_y9xHVutcxyag2MWi6eClY"; // код таблицы
+        final String spreadsheetId = "1Tp10m32jJywD8_L2s2gqapcobvUOLxBpNyyevUQsAh0"; // код таблицы
         final String range = "Актуальные потребности!A2:K";   // название листа и диапозона
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
-        ValueRange response = service.spreadsheets().values()
-                .get(spreadsheetId, range)
-                .execute();
-        List<List<Object>> values = response.getValues();
-        if (values == null || values.isEmpty()) {
-            return "No data found.";
-        } else {
-            String dataOfTable = "";
-            for (List row : values) {                                   // цикл проходит по всей таблице со значениями
-                if (idVacantion.equals(row.get(0))) {                   // этот блок при совпадении id вакансии присваивает значения переменным Vacantion и возвращает собранное сообщение
-                    vacantion.setIdVacantion("" + row.get(0));
-                    System.out.println(vacantion.getIdVacantion());
-                    vacantion.setTypeVacantion("" + row.get(1));
-                    vacantion.setStackVacancion("" + row.get(2));
-                    vacantion.setGrade("" + row.get(3));
-                    vacantion.setDescriptionVacancion("" + row.get(4));
-                    vacantion.setRequirementsVacantion("" + row.get(5));
-                    vacantion.setExperienceVacantion("" + row.get(6));
-                    vacantion.setRegionVacantion("" + row.get(7));
-                    vacantion.setOfficeAddressVacantion("" + row.get(8));
-                    vacantion.setGeographyVacantion("" + row.get(9));
-                    vacantion.setWorkFormatVacantion("" + row.get(10));
-                    vacantion.setNameVacantion();
-                    return vacantion.fullDescriptionOfVacancion();
-                }
-            }
-            return dataOfTable;
+        int countCellA = 1;
+        /*
+        for (Vacantion vacantion : listOfVacantion) {
+            ValueRange body = new ValueRange()
+                    .setValues(Arrays.asList(
+                            Arrays.asList("" + vacantion.getIdVacantion()),
+                            Arrays.asList("Пока пусто"),
+                            Arrays.asList("" + vacantion.getStackOfVacantion()),
+                            Arrays.asList("" + vacantion.getGradeOfVacantion()),
+                            Arrays.asList("" + vacantion.getDescriptionOfVacantion()),
+                            Arrays.asList("" + vacantion.getRequirementsToVacantion()),
+                            Arrays.asList("" + vacantion.getExpirienceOfVacantion()),
+                            Arrays.asList("" + vacantion.getAddressOfVacantion()),
+                            Arrays.asList("" + vacantion.getGeographyOfVacantion()),
+                            Arrays.asList("" + vacantion.getWorkFormatOfVacantion()),
+                            Arrays.asList("" + vacantion.getResourceManagerOfVacantion())));
+
+            UpdateValuesResponse result = service.spreadsheets().values()
+                    .update(spreadsheetId, "A" + 1, body)
+                    .setValueInputOption("RAW")
+                    .execute();
+            // ValueRange response = service.spreadsheets().values()
+            //       .get(spreadsheetId, range)
+            //       .execute();
+
+
         }
+
+         */
+
+
+
     }
 }
