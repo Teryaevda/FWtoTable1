@@ -16,6 +16,8 @@ import org.json.simple.parser.ParseException;
 
 
 import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -59,7 +61,7 @@ public class HttpClient {
 
                 JSONObject json = new JSONObject();
 
-                StringEntity stringEntity = new StringEntity("{\"Status\":1,\"FromDate\":\"2020-01-01\",\"ToDate\":\"2022-08-09\",\"Paging\":{\"page\":1,\"count\":100}}");
+                StringEntity stringEntity = new StringEntity("{\"Status\":1,\"FromDate\":\"2020-01-01\",\"ToDate\":\"2025-08-09\",\"Paging\":{\"page\":1,\"count\":100}}");
                 request1.setEntity(stringEntity);
                 request1.addHeader("Content-Type", "application/json");
                 request1.addHeader("Authorization","Bearer " + jwtToken);
@@ -73,8 +75,6 @@ public class HttpClient {
                 String strJson = null;
 
                 strJson = EntityUtils.toString(entity1);
-                //System.out.println(EntityUtils.toString(entity1));
-                // }
 
                 Object obj1 = new JSONParser().parse(strJson);
                 System.out.println(obj1);
@@ -88,59 +88,57 @@ public class HttpClient {
                 JSONArray jsonArray = (JSONArray) jo1.get("items");
                 Iterator itemItr = jsonArray.iterator();
 
+                ArrayList<Vacantion> listOfVacantion = new ArrayList<>();
+
                 while (itemItr.hasNext()) {
-                    JSONObject test = (JSONObject) itemItr.next();
-                    System.out.println("- название: " + test.get("name"));
-                    System.out.println("- ID: " + test.get("jobId"));
-                    System.out.println("- описание: " + test.get("description"));
-                    System.out.println("- комментарии: " + test.get("comment"));
-                    //System.out.println(" - КастомФиелдВэлю: " + test.get("customFieldsValues"));
-                    JSONArray jsonArrayCustomFieldsValues = (JSONArray) test.get("customFieldsValues");
+                    Vacantion vacantion = new Vacantion();
+                    JSONObject jsonObjectForItemItr = (JSONObject) itemItr.next();
+                    vacantion.setNameOfVacantion(jsonObjectForItemItr.get("name"));
+                    System.out.println("- название: "+ vacantion.getNameOfVacantion());
+                    vacantion.setIdVacantion(jsonObjectForItemItr.get("jobId"));
+                    System.out.println("- ID: " + vacantion.getIdVacantion());
+                    vacantion.setDescriptionOfVacantion(jsonObjectForItemItr.get("description"));
+                    System.out.println("- описание: " + vacantion.getDescriptionOfVacantion());
+                    vacantion.setCommentToVacantion(jsonObjectForItemItr.get("comment"));
+                    System.out.println(vacantion.getCommentToVacantion());
+                    System.out.println("- комментарии: " + jsonObjectForItemItr.get("comment"));
+                    JSONArray jsonArrayCustomFieldsValues = (JSONArray) jsonObjectForItemItr.get("customFieldsValues");
                     Iterator customFieldsValuesItr = jsonArrayCustomFieldsValues.iterator();
                     while (customFieldsValuesItr.hasNext()){
-                        JSONObject test1 = (JSONObject) customFieldsValuesItr.next();
-                        //System.out.println("- ФайлдСтэмп: " + test1.get("fieldStamp"));
-                        if (test1.get("systemName").equals("TeamForce_Project")){
-                            System.out.println("- Проект: " + test1.get("value"));
-                        }else if (test1.get("systemName").equals("TeamForce_Requirements")){
-                            System.out.println("- Требования: " + test1.get("value"));
-                        } else if(test1.get("systemName").equals("TeamForce_Role1111")){
-                            System.out.println("- номер Стека: " + test1.get("value"));
-                        } else if(test1.get("systemName").equals("TeamForce_Grades")) {
-                            System.out.println("- номер Грейда: " + test1.get("value"));
-                        } else if(test1.get("systemName").equals("TeamForce_Exp")) {
-                            System.out.println("- номер Опыта: " + test1.get("value"));
-                        }else if(test1.get("systemName").equals("TeamForce_Address")) {
-                            System.out.println("- адресс: " + test1.get("value"));
-                        }else if(test1.get("systemName").equals("TeamForce_Format")) {
-                            System.out.println("- номер Формат работы: " + test1.get("value"));
-                        }else if(test1.get("systemName").equals("TeamForce_Resource_manager")) {
-                            System.out.println("- номер Ресурсного менеджера: " + test1.get("value"));
-                        }else if(test1.get("systemName").equals("TeamForce_Search_Geography")) {
-                            System.out.println("- Локация: " + test1.get("value"));
+                        JSONObject jsonObjectForCustomFieldsValuesItr = (JSONObject) customFieldsValuesItr.next();
+                        if (jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Project")){
+                            vacantion.setProject(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Проект: " + vacantion.getProject());
+                        } else if (jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Requirements")){
+                            vacantion.setRequirementsToVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Требования: " + vacantion.getRequirementsToVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Role1111")){
+                            vacantion.setStackOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Стек: " + vacantion.getStackOfVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Grades")) {
+                            vacantion.setGradeOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Грейд: " + vacantion.getGradeOfVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Exp")) {
+                            vacantion.setExpirienceOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Опыт: " + vacantion.getExpirienceOfVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Address")) {
+                            vacantion.setAddressOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Адресс: " + vacantion.getAddressOfVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Format")) {
+                            vacantion.setWorkFormatOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Формат работы: " + vacantion.getWorkFormatOfVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Resource_manager")) {
+                            System.out.println("- номер Ресурсного менеджера: " + jsonObjectForCustomFieldsValuesItr.get("value"));
+                            vacantion.setResourceManagerOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Ресурсный менеджер: " + vacantion.getResourceManagerOfVacantion());
+                        } else if(jsonObjectForCustomFieldsValuesItr.get("systemName").equals("TeamForce_Search_Geography")) {
+                            vacantion.setGeographyOfVacantion(jsonObjectForCustomFieldsValuesItr.get("value"));
+                            System.out.println("- Локация: " + vacantion.getGeographyOfVacantion());
                         }
                     }
-                    //System.out.println("- rk.x: " + test.get("fieldStamp"));
-                    //JSONArray jsonArray1 = (JSONArray) jo1.get("customFieldsValues");
-                    // Iterator itemItr1 = jsonArray1.iterator();
-                    // while (itemItr1.hasNext()){
-                    //JSONObject test1 = (JSONObject) itemItr1.next();
-                    //System.out.println("- rk.x: " + test.get("customFieldsValues"));
                     System.out.println("----------------------------------------------------------------------");
-
+                    listOfVacantion.add(vacantion);
                 }
-
-
-                // System.out.println("- item: " + test.get("customFieldsValues"));
-                // System.out.println("----------------------------------------------------------------------");
-
-                // }
-
-
-
-
-
-
             } catch (ParseException e) {
                 e.printStackTrace();
             } finally {
@@ -149,7 +147,5 @@ public class HttpClient {
         } finally {
             httpClient.close();
         }
-
     }
-
 }
