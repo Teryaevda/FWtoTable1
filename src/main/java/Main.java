@@ -3,13 +3,23 @@ import java.security.GeneralSecurityException;
 
 public class Main {
     public static void main(String[] args) {
-       SheetsServiceUtil sheetsServiceUtil = new SheetsServiceUtil();
-        try {
-            SheetsServiceUtil.getSheetsService();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
+        while (true) {
+            SheetsServiceUtil sheetsServiceUtil = new SheetsServiceUtil();
+            try {
+                SheetsServiceUtil.setup();
+                HttpClient httpClient = new HttpClient();
+                httpClient.httpGenerationVacantion();
+                sheetsServiceUtil.clearSheetAndWriteSheet(httpClient.listOfVacantion);
+            } catch (GeneralSecurityException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                Thread.sleep(60000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

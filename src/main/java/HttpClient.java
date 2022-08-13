@@ -16,25 +16,25 @@ import org.json.simple.parser.ParseException;
 
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class HttpClient {
-    ArrayList<Vacantion> listOfVacantion = new ArrayList<>();
+    List<List<Object>> listOfVacantion = new ArrayList<>();
+
     public void httpGenerationVacantion() throws IOException {
 
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         try {
-
             // создаем объект клиента
             HttpGet request = new HttpGet("https://app.friend.work/api/Accounts/LogIn?username=d.teryaev@teamforce.ru&password=Qwerty123");
             CloseableHttpResponse response = httpClient.execute(request);
-
             try {
-
                 // статус ответа
                 System.out.println(response.getProtocolVersion());              // HTTP/1.1
                 System.out.println(response.getStatusLine().getStatusCode());   // 200
@@ -89,6 +89,7 @@ public class HttpClient {
 
                 while (itemItr.hasNext()) {
                     Vacantion vacantion = new Vacantion();
+                    List<Object> listOfAllFieldVacantion = new ArrayList<>();
                     JSONObject jsonObjectForItemItr = (JSONObject) itemItr.next();
                     vacantion.setNameOfVacantion(jsonObjectForItemItr.get("name"));
                     System.out.println("- название: "+ vacantion.getNameOfVacantion());
@@ -98,6 +99,8 @@ public class HttpClient {
                     System.out.println("- описание: " + vacantion.getDescriptionOfVacantion());
                     vacantion.setCommentToVacantion(jsonObjectForItemItr.get("comment"));
                     System.out.println("- комментарии: " + vacantion.getCommentToVacantion());
+                    vacantion.setCategoryOfVacanion(jsonObjectForItemItr.get("jobTypeId"));
+                    System.out.println("- Категория: " + vacantion.getCategoryOfVacanion());
                     JSONArray jsonArrayCustomFieldsValues = (JSONArray) jsonObjectForItemItr.get("customFieldsValues");
                     Iterator customFieldsValuesItr = jsonArrayCustomFieldsValues.iterator();
                     while (customFieldsValuesItr.hasNext()){
@@ -133,9 +136,23 @@ public class HttpClient {
                         }
                     }
                     System.out.println("----------------------------------------------------------------------");
-                    listOfVacantion.add(vacantion);
-                }
+                    listOfAllFieldVacantion.add(vacantion.getIdVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getCategoryOfVacanion());
+                    listOfAllFieldVacantion.add(vacantion.getStackOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getGradeOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getDescriptionOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getRequirementsToVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getExpirienceOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getAddressOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getGeographyOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getWorkFormatOfVacantion());
+                    listOfAllFieldVacantion.add(vacantion.getResourceManagerOfVacantion());
 
+                    listOfVacantion.add(listOfAllFieldVacantion);
+                    System.out.println("Добавлена вакансия:********************************************** ");
+                    System.out.println(listOfVacantion.get(listOfVacantion.size()-1));
+                    System.out.println("Добавлеие закончено***********************************************");
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             } finally {
@@ -145,10 +162,7 @@ public class HttpClient {
             httpClient.close();
         }
     }
-    public ArrayList<Vacantion> getlistOfVacantion() throws IOException {
-        httpGenerationVacantion();
-        return listOfVacantion;
-    }
+
     public void clearlistOfVacantion(){
         listOfVacantion.clear();
     }

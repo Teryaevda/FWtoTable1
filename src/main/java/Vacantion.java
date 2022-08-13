@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
 
+import org.jsoup.Jsoup;
 public class Vacantion {
 
     String nameOfVacantion;
@@ -15,7 +14,12 @@ public class Vacantion {
     String addressOfVacantion;
     String workFormatOfVacantion;
     String resourceManagerOfVacantion;
+    String categoryOfVacanion;
     String geographyOfVacantion;
+
+    public void setCategoryOfVacanion(Object categoryOfVacanion) {
+        this.categoryOfVacanion = Category.getCategory(Integer.parseInt(categoryOfVacanion.toString()));
+    }
 
     public void setNameOfVacantion(Object nameOfVacantion) {
         if (nameOfVacantion == null){
@@ -33,7 +37,9 @@ public class Vacantion {
         if (descriptionOfVacantion == null){
             this.descriptionOfVacantion = "-";
         } else {
-            this.descriptionOfVacantion = (String) descriptionOfVacantion;
+
+            String descriptionWhthoutHTMLTag = new HtmlToPlainText().getPlainText(Jsoup.parse((String) descriptionOfVacantion));
+            this.descriptionOfVacantion = descriptionWhthoutHTMLTag;
         }
     }
 
@@ -149,4 +155,8 @@ public class Vacantion {
     public String getGeographyOfVacantion() {
         return geographyOfVacantion;
     }
+    public String getCategoryOfVacanion() {
+        return categoryOfVacanion;
+    }
+
 }
