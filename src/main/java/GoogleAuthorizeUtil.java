@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.List;
-
+// класс для авторизации в гугл
 public class GoogleAuthorizeUtil {
     public static Credential authorize() throws IOException, GeneralSecurityException {
         InputStream in = GoogleAuthorizeUtil.class.getResourceAsStream("/client_secret.json");

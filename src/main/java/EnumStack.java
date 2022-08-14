@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+ Возвращает стек getValueEnumStack
+ */
 public enum EnumStack {
 
     ENUM_0("-"),

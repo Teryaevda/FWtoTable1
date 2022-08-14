@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+возвращает грейд getValuesGrade
+ */
 public enum EnumGrade {
 
     ENUM_0("-"),

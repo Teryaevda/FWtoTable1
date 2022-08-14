@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+Класс описывает формат работы. Возвращает с помощью метода getValuesWorkFormat описание формата согласно значению из апи
+ */
 public enum EnumWorkFormat {
     ENUM_0("-"),
     ENUM_1("Офис"),

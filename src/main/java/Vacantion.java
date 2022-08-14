@@ -1,5 +1,7 @@
-
 import org.jsoup.Jsoup;
+/* Класс описывающий вакансию
+Все сеттеры принмаю обджект из HTTPClient из парсинга JSON
+ */
 public class Vacantion {
 
     String nameOfVacantion;
@@ -37,9 +39,7 @@ public class Vacantion {
         if (descriptionOfVacantion == null){
             this.descriptionOfVacantion = "-";
         } else {
-
-            String descriptionWhthoutHTMLTag = new HtmlToPlainText().getPlainText(Jsoup.parse((String) descriptionOfVacantion));
-            this.descriptionOfVacantion = descriptionWhthoutHTMLTag;
+            this.descriptionOfVacantion = new HtmlToPlainText().getPlainText(Jsoup.parse((String) descriptionOfVacantion));
         }
     }
 
@@ -93,7 +93,7 @@ public class Vacantion {
     }
 
     public void setResourceManagerOfVacantion(Object numberResourceManagerOfVacantion) {
-        this.resourceManagerOfVacantion = EnumResourceManager.getValuesResourceManager().get((int)(long)numberResourceManagerOfVacantion);
+        this.resourceManagerOfVacantion = ResourceManager.getResourceManager(Integer.parseInt(numberResourceManagerOfVacantion.toString()));
     }
 
     public void setGeographyOfVacantion(Object geographyOfVacantion) {

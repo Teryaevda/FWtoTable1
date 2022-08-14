@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-
+/* Класс категории:
+номер ключа хешмап соответствует номеру возвращаему апи фриентворка
+ */
 public class Category {
 
     public static final HashMap<Integer, String> MAP_CATEGORY = new HashMap();

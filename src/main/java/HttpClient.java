@@ -1,5 +1,4 @@
 
-
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -20,16 +19,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-
+/*
+Класс создает подключение к апи фриендворка, забирает токен авторизации и обеспечивают работу
+*/
 public class HttpClient {
     List<List<Object>> listOfVacantion = new ArrayList<>();
 
     public void httpGenerationVacantion() throws IOException {
 
-
         CloseableHttpClient httpClient = HttpClients.createDefault();
-
         try {
             // создаем объект клиента
             HttpGet request = new HttpGet("https://app.friend.work/api/Accounts/LogIn?username=d.teryaev@teamforce.ru&password=Qwerty123");
@@ -49,22 +47,23 @@ public class HttpClient {
                     jwt = EntityUtils.toString(entity);
                     System.out.println(jwt);
                 }
+//парсим jwt через json
                 Object obj = new JSONParser().parse(jwt);
 // Кастим obj в JSONObject
                 JSONObject jo = (JSONObject) obj;
 // Достаём токен
                 String jwtToken = (String) jo.get("jwtToken");
                 System.out.println(jwtToken);
-
+// Пост запрос к апи фриендворка, который возвращает JSON с вакансиями по фильтру
                 HttpPost request1 = new HttpPost("https://app.friend.work/api/Jobs/ByFilter");
-
-                //JSONObject json = new JSONObject();
-
+// Добавляет параметры к пост запросу согласно апи для нужного филтра
                 StringEntity stringEntity = new StringEntity("{\"Status\":1,\"FromDate\":\"2020-01-01\",\"ToDate\":\"2025-08-09\",\"Paging\":{\"page\":1,\"count\":100}}");
                 request1.setEntity(stringEntity);
+//доавляет в хедер тип запроса и токен авторизации
                 request1.addHeader("Content-Type", "application/json");
                 request1.addHeader("Authorization","Bearer " + jwtToken);
 
+// Получение ответа от апи и парсинг JSON
                 CloseableHttpResponse response1 = httpClient.execute(request1);
                 System.out.println(response1.getProtocolVersion());              // HTTP/1.1
                 System.out.println(response1.getStatusLine().getStatusCode());   // 200
@@ -80,10 +79,12 @@ public class HttpClient {
 // Кастим obj в JSONObject
                 JSONObject jo1 = (JSONObject) obj1;
 
-                String js = (String) jo.get("items");
-               // System.out.println(js);
+                //String js = (String) jo.get("items");
 
-// Достаём токен
+/* разбор JSON и создание объектов по классам.
+ После окончания цыклов помещает полученные данные по вакансии в лист listOfAllFieldVacantion,
+ listOfAllFieldVacantion в listOfVacantion для передачи в метод clearSheetAndWriteSheet класса SheetsServiceUtil
+ */
                 JSONArray jsonArray = (JSONArray) jo1.get("items");
                 Iterator itemItr = jsonArray.iterator();
 
