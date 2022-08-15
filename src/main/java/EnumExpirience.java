@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+enum описывает опыт разработчиков получаемый из апи
+необходимый опыт согласно номеру полученнуму из апи присваивает метод getValuesExpirience класса
+ */
 public enum EnumExpirience {
     ENUM_0("-"),
     ENUM_1("До 3 лет"),

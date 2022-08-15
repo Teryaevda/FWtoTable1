@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+getValuesResourceManager возвращает ресурсного менеджера
+ */
 public enum EnumResourceManager {
 
     ENUM_0("-"),

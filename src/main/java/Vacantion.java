@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
-
+import org.jsoup.Jsoup;
+/* Класс описывающий вакансию
+Все сеттеры принмаю обджект из HTTPClient из парсинга JSON
+ */
 public class Vacantion {
 
     String nameOfVacantion;
@@ -15,7 +16,12 @@ public class Vacantion {
     String addressOfVacantion;
     String workFormatOfVacantion;
     String resourceManagerOfVacantion;
+    String categoryOfVacanion;
     String geographyOfVacantion;
+
+    public void setCategoryOfVacanion(Object categoryOfVacanion) {
+        this.categoryOfVacanion = Category.getCategory(Integer.parseInt(categoryOfVacanion.toString()));
+    }
 
     public void setNameOfVacantion(Object nameOfVacantion) {
         if (nameOfVacantion == null){
@@ -33,7 +39,7 @@ public class Vacantion {
         if (descriptionOfVacantion == null){
             this.descriptionOfVacantion = "-";
         } else {
-            this.descriptionOfVacantion = (String) descriptionOfVacantion;
+            this.descriptionOfVacantion = new HtmlToPlainText().getPlainText(Jsoup.parse((String) descriptionOfVacantion));
         }
     }
 
@@ -87,7 +93,7 @@ public class Vacantion {
     }
 
     public void setResourceManagerOfVacantion(Object numberResourceManagerOfVacantion) {
-        this.resourceManagerOfVacantion = EnumResourceManager.getValuesResourceManager().get((int)(long)numberResourceManagerOfVacantion);
+        this.resourceManagerOfVacantion = ResourceManager.getResourceManager(Integer.parseInt(numberResourceManagerOfVacantion.toString()));
     }
 
     public void setGeographyOfVacantion(Object geographyOfVacantion) {
@@ -149,4 +155,8 @@ public class Vacantion {
     public String getGeographyOfVacantion() {
         return geographyOfVacantion;
     }
+    public String getCategoryOfVacanion() {
+        return categoryOfVacanion;
+    }
+
 }
