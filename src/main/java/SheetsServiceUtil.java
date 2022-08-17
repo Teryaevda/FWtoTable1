@@ -13,7 +13,7 @@ import java.util.List;
 // класс работы с гуглшитами/
 public class SheetsServiceUtil {
 
-    private static final String APPLICATION_NAME = "Google Sheets Example";
+    private static final String APPLICATION_NAME = "TableWithVacantionApp";
 // создает авторизацию
     public static Sheets getSheetsService() throws IOException, GeneralSecurityException {
         Credential credential = GoogleAuthorizeUtil.authorize();
