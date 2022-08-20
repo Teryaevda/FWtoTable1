@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class ResourceManager {
+public class ResourceManager implements Parametrs {
 
     public static final HashMap<Integer, String> MAP_RESOURCE_MANAGER = new HashMap();
 
@@ -15,7 +15,7 @@ public class ResourceManager {
         MAP_RESOURCE_MANAGER.put(7, "-");
         MAP_RESOURCE_MANAGER.put(8, "Майоров Лев \nТГ: @leothe1");
     }
-    public static String getResourceManager(Integer numResourceManager){
+    public static String getParametrs(Integer numResourceManager){
         return MAP_RESOURCE_MANAGER.get(numResourceManager);
     }
 }

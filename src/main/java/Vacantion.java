@@ -20,7 +20,7 @@ public class Vacantion {
     String geographyOfVacantion;
 
     public void setCategoryOfVacanion(Object categoryOfVacanion) {
-        this.categoryOfVacanion = Category.getCategory(Integer.parseInt(categoryOfVacanion.toString()));
+        this.categoryOfVacanion = Category.getParametrs(Integer.parseInt(categoryOfVacanion.toString()));
     }
 
     public void setNameOfVacantion(Object nameOfVacantion) {
@@ -69,19 +69,19 @@ public class Vacantion {
 
     public void setStackOfVacantion(Object numberOfStackVacantion) {
 
-        this.stackOfVacantion = EnumStack.getValueEnumStack().get((int)(long)numberOfStackVacantion);
+        this.stackOfVacantion = Stack.getParametrs(Integer.parseInt(numberOfStackVacantion.toString()));
     }
 
     public void setGradeOfVacantion(Object numberGradeOfVacantion) {
-        this.gradeOfVacantion = EnumGrade.getValuesGrade().get((int)(long)numberGradeOfVacantion);
+        this.gradeOfVacantion = Grade.getParametrs(Integer.parseInt(numberGradeOfVacantion.toString()));
     }
 
     public void setExpirienceOfVacantion(Object numberExpirienceOfVacantion) {
-        this.expirienceOfVacantion = EnumExpirience.getValuesExpirience().get((int)(long)numberExpirienceOfVacantion);
+        this.expirienceOfVacantion = Expirience.getParametrs(Integer.parseInt(numberExpirienceOfVacantion.toString()));
     }
 
     public void setAddressOfVacantion(Object addressOfVacantion) {
-        if (addressOfVacantion == null) {
+        if (addressOfVacantion == "" | addressOfVacantion == null) {
             this.addressOfVacantion = "-";
         } else {
             this.addressOfVacantion = (String) addressOfVacantion;
@@ -89,11 +89,11 @@ public class Vacantion {
     }
 
     public void setWorkFormatOfVacantion(Object numberWorkFormatOfVacantion) {
-        this.workFormatOfVacantion = EnumWorkFormat.getValuesWorkFormat().get((int)(long)numberWorkFormatOfVacantion);
+        this.workFormatOfVacantion = WorkFormat.getParametrs(Integer.parseInt(numberWorkFormatOfVacantion.toString()));
     }
 
     public void setResourceManagerOfVacantion(Object numberResourceManagerOfVacantion) {
-        this.resourceManagerOfVacantion = ResourceManager.getResourceManager(Integer.parseInt(numberResourceManagerOfVacantion.toString()));
+        this.resourceManagerOfVacantion = ResourceManager.getParametrs(Integer.parseInt(numberResourceManagerOfVacantion.toString()));
     }
 
     public void setGeographyOfVacantion(Object geographyOfVacantion) {

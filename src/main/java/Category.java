@@ -2,7 +2,7 @@ import java.util.HashMap;
 /* Класс категории:
 номер ключа хешмап соответствует номеру возвращаему апи фриентворка
  */
-public class Category {
+public class Category implements Parametrs {
 
     public static final HashMap<Integer, String> MAP_CATEGORY = new HashMap();
 
@@ -17,7 +17,7 @@ public class Category {
         MAP_CATEGORY.put(135, "Тестирование");
         MAP_CATEGORY.put(136, "Прочее");
     }
-    public static String getCategory(Integer numOfCategory){
+    public static String getParametrs(Integer numOfCategory){
         return MAP_CATEGORY.get(numOfCategory);
     }
 }
