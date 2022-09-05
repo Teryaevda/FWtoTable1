@@ -1,3 +1,5 @@
+package com.tablewithvacantion;
+
 import java.util.HashMap;
 /* Класс категории:
 номер ключа хешмап соответствует номеру возвращаему апи фриентворка

@@ -1,3 +1,4 @@
+package com.tablewithvacantion;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -151,7 +152,6 @@ public class HttpClient {
 
                     listOfVacantion.add(listOfAllFieldVacantion);
                     System.out.println("Добавлена вакансия:********************************************** ");
-                    System.out.println(listOfVacantion.get(listOfVacantion.size()-1));
                     System.out.println("Добавлеие закончено***********************************************");
                 }
             } catch (ParseException e) {

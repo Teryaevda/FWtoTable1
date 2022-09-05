@@ -1,3 +1,6 @@
+package com.tablewithvacantion;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.internal.StringUtil;
 import org.jsoup.helper.Validate;

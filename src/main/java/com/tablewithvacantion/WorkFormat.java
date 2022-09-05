@@ -1,3 +1,7 @@
+package com.tablewithvacantion;
+
+import com.tablewithvacantion.Parametrs;
+
 import java.util.HashMap;
 
 public class WorkFormat implements Parametrs {

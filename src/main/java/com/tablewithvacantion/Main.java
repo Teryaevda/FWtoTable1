@@ -1,3 +1,8 @@
+package com.tablewithvacantion;
+
+import com.tablewithvacantion.GoogleAuthorizeUtil;
+import com.tablewithvacantion.HttpClient;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 

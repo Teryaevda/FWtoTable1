@@ -1,3 +1,7 @@
+package com.tablewithvacantion;
+
+import com.tablewithvacantion.Grade;
+import com.tablewithvacantion.ResourceManager;
 import org.jsoup.Jsoup;
 /* Класс описывающий вакансию
 Все сеттеры принмаю обджект из HTTPClient из парсинга JSON

@@ -1,3 +1,5 @@
+package com.tablewithvacantion;
+
 import java.util.HashMap;
 
 public class Grade implements Parametrs {
