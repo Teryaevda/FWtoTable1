@@ -7,7 +7,7 @@ public class Stack implements Parametrs {
     static {
         MAP_STACK.put(0, "-");
         MAP_STACK.put(1, "Администратор");
-        MAP_STACK.put(2, "Ананлитик");
+        MAP_STACK.put(2, "Аналитик");
         MAP_STACK.put(3, "Архитектор");
         MAP_STACK.put(4, "Бизнес Аналитик");
         MAP_STACK.put(5, "Дата инженер");
