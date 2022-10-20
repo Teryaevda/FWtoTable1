@@ -31,7 +31,7 @@ public class HttpClient {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         try {
             // создаем объект клиента
-            HttpGet request = new HttpGet("https://app.friend.work/api/Accounts/LogIn?username=d.teryaev@teamforce.ru&password=Qwerty123");
+            HttpGet request = new HttpGet("https://app.friend.work/api/Accounts/LogIn?username=d.teryaev@teamforce.ru&password=");
             CloseableHttpResponse response = httpClient.execute(request);
             try {
                 // статус ответа
